@@ -29,5 +29,5 @@ class CreateCustomerRequest(BaseModel):
 
 class CreateCustomerResponse(BaseModel):
     success: bool
-    id: int | None = None
+    id: int
     errorMsg: str | None = None
