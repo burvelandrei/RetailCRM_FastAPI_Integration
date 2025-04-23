@@ -4,7 +4,6 @@ import logging.config
 from fastapi import HTTPException, status
 from typing import Dict, Any, Optional
 from utils.logger import logging_config
-from config import settings
 
 
 logging.config.dictConfig(logging_config)
@@ -87,7 +86,7 @@ class RetailCRMClient:
             response = await self._client.post(
                 url=f"{self.base_url}/{endpoint}",
                 params=params,
-                data=data,
+                json=data,
                 timeout=10.0
             )
             response.raise_for_status()
@@ -121,12 +120,3 @@ class RetailCRMClient:
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=error_msg
             )
-
-
-async def get_retailcrm_client():
-    """Функция создания RetailCRMClient"""
-    async with RetailCRMClient(
-        subdomain=settings.RETAILCRM_SUBDOMAIN,
-        api_key=settings.RETAILCRM_API_KEY
-    ) as client:
-        yield client
