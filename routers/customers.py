@@ -14,7 +14,11 @@ from config import settings
 router = APIRouter(prefix="/customers")
 
 
-@router.get("/", response_model=CustomersResponse)
+@router.get(
+        "/",
+        response_model=CustomersResponse,
+        summary="Получение списка клиентов",
+)
 async def get_customers(
     name: str | None = Query(None, alias="filter[name]"),
     email: str | None = Query(None, alias="filter[email]"),
@@ -48,11 +52,15 @@ async def get_customers(
     )
 
 
-@router.post("/create/", response_model=CreateCustomerResponse)
+@router.post(
+        "/create/",
+        response_model=CreateCustomerResponse,
+        summary="Создание клиента",
+)
 async def create_customer(
     customer_data: CreateCustomerRequest,
 ):
-    """Создание клиента в RetailCRM."""
+    """Создание клиента"""
     payload = customer_data.dict()
     payload["customer"] = json.dumps(payload["customer"], ensure_ascii=False)
     async with RetailCRMClient(

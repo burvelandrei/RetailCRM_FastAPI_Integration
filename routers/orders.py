@@ -16,13 +16,17 @@ from config import settings
 router = APIRouter(prefix="/orders")
 
 
-@router.get("/", response_model=OrdersResponse)
+@router.get(
+        "/",
+        response_model=OrdersResponse,
+        summary="Получение списка заказов клиента",
+)
 async def get_customer_orders(
     customer_data: OrdersRequest,
     page: int = Query(1, ge=1),
     limit: int = Query(20, ge=1, le=100),
 ):
-    """Получение списка заказов пользователя"""
+    """Получение списка заказов клиента"""
     params: Dict[str, Any] = {
         "page": page,
         "limit": limit
@@ -40,7 +44,11 @@ async def get_customer_orders(
     )
 
 
-@router.post("/create/", response_model=CreateOrderResponse)
+@router.post(
+        "/create/",
+        response_model=CreateOrderResponse,
+        summary="Создание нового заказа для клиента"
+)
 async def create_order(
     order_data: CreateOrderRequest,
 ):
@@ -74,7 +82,11 @@ async def create_order(
     )
 
 
-@router.post("/payments/create/", response_model=CreatePaymentResponse)
+@router.post(
+        "/payments/create/",
+        response_model=CreatePaymentResponse,
+        summary="Создание и привязка платежа к заказу",
+)
 async def add_payment(payment_data: CreatePaymentRequest):
     """Создание и привязка платежа к заказу"""
     payment = {
