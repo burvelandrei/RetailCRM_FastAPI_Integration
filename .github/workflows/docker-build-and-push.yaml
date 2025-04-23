@@ -1,0 +1,26 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Клонирование репозитория
+        uses: actions/checkout@v4
+
+      - name: Вход в Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: burvelandrei
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Сборка и пуш Docker образа
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: burvelandrei/retailcrm-fastapi-integration:latest

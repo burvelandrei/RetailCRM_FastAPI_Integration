@@ -1,0 +1,10 @@
+services:
+  app:
+    image: burvelandrei/retailcrm-fastapi-integration:latest
+    container_name: retailcrm-fastapi-integration
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+    env_file: .env
+    ports:
+      - "8001:8000"
