@@ -1,8 +1,14 @@
 import json
-from fastapi import APIRouter, Query, Depends
-from datetime import date
+from fastapi import APIRouter, Query
 from typing import Dict, Any
-from schemas.order import OrdersResponse, OrdersRequest, CreateOrderRequest, CreateOrderResponse, CreatePaymentRequest, CreatePaymentResponse
+from schemas.order import (
+    OrdersResponse,
+    OrdersRequest,
+    CreateOrderRequest,
+    CreateOrderResponse,
+    CreatePaymentRequest,
+    CreatePaymentResponse,
+)
 from services.retailcrm_client import RetailCRMClient
 from config import settings
 

@@ -10,10 +10,12 @@ class Order(BaseModel):
     class Config:
         extra = "allow"
 
+
 class OrdersResponse(BaseModel):
     success: bool
     orders: List[Order]
     pagination: Dict | None = None
+
 
 class OrderItemRequest(BaseModel):
     productName: str
@@ -33,6 +35,7 @@ class CreateOrderResponse(BaseModel):
     id: int
     errorMsg: str | None = None
 
+
 class CreatePaymentRequest(BaseModel):
     site: str
     orderId: int
@@ -40,6 +43,7 @@ class CreatePaymentRequest(BaseModel):
     type: str
     status: str | None = "paid"
     externalId: str | None = None
+
 
 class CreatePaymentResponse(BaseModel):
     success: bool
