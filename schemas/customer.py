@@ -17,10 +17,10 @@ class CustomersResponse(BaseModel):
 
 class CreateCustomer(BaseModel):
     firstName: str
-    email: str | None = None
-    phone: str | None = None
     lastName: str | None = None
     patronymic: str | None = None
+    email: str | None = None
+    phone: str | None = None
     externalId: str | None = None
 
 class CreateCustomerRequest(BaseModel):
